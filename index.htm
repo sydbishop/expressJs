@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basics of Express JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    body{
+      background-color: #0d1117;
+      color: #e6edfe;
+    }
+
+    .pageContent{
+      margin-top: 4.5em;
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+
+    h4{
+      font-size: 32px;
+    }
+
+    h5{
+      font-size: 22px;
+      color: #7d8590;
+    }
+
+    .section{
+      padding-bottom: .3em;
+      margin-bottom: 5%;
+    }
+
+    .sectionTitle{
+      padding-bottom: .3em;
+      border-bottom: 1px solid #21262d;
+      margin-bottom: 1em;
+    }
+
+    .subSection{
+      padding-bottom: 1em;
+    }
+
+  </style>
+  </head>
+  <body>
+    <!--topNav-->
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Basics of Express.js</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Basics of Express.js</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    What is Express.js?
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#item-1-1">Description</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-1-2">Purpose</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-1-3">Example Express App</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-1-4">Importance</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Setting up an Express.js Server
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">     
+                    <li><a class="dropdown-item" href="#item-2-1">Initialize Your Project</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li> 
+                    <li><a class="dropdown-item" href="#item-2-2">Integrate Express.js into the MERN Stack</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-2-3">Dependencies</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-2-4">Considerations for Configuration</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Routing and Middleware
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#item-3-1">Middleware Functions</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-3-2">Using Middleware</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-3-3">Define Routes</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Handling Requests and Responses
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#item-4-1">Incoming Requests</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-4-2">Middleware Execution</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-4-3">Route Handling</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-4-4">Sending Responses</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-4-5">Error Handling</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Integrating with MongoDB using Mongoose
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#item-5-1">Install Dependencies</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-5-2">Set up Express App</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-5-3">Connect to MongoDB</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-5-4">Implement CRUD Operations</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>      
+                    <li><a class="dropdown-item" href="#item-5-4">Start the Server</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <div class="pageContent">
+    <!--nestedNav-->
+    <div class="row">
+      <div class="col-4">
+        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link" href="#item-1">What is Express JS?</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-1-1">Description</a>
+              <a class="nav-link ms-3 my-1" href="#item-1-2">Purpose</a>
+              <a class="nav-link ms-3 my-1" href="#item-1-3">Example Express App</a>
+              <a class="nav-link ms-3 my-1" href="#item-1-4">Importance</a>
+            </nav>
+            <a class="nav-link" href="#item-2">Setting up an Express.js Server</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-2-1">Initialize Your Project</a>
+              <a class="nav-link ms-3 my-1" href="#item-2-2">Integrate Express.js into the MERN Stack</a>
+              <a class="nav-link ms-3 my-1" href="#item-2-3">Dependencies</a>
+              <a class="nav-link ms-3 my-1" href="#item-2-4">Considerations for Configuration</a>
+            </nav>
+            <a class="nav-link" href="#item-3">Routing and Middleware</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-3-1">Middleware Functions</a>
+              <a class="nav-link ms-3 my-1" href="#item-3-2">Using Middleware</a>
+              <a class="nav-link ms-3 my-1" href="#item-3-3">Define Routes</a>
+            </nav>
+            <a class="nav-link" href="#item-5">Handling Request and responses </a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-4-1">Incoming requests</a>
+              <a class="nav-link ms-3 my-1" href="#item-4-2">Middleware Execution</a>
+              <a class="nav-link ms-3 my-1" href="#item-4-3">Route Handling</a>
+              <a class="nav-link ms-3 my-1" href="#item-4-4">Sending Responses</a>
+              <a class="nav-link ms-3 my-1" href="#item-4-5">Error Handling</a>
+            </nav>
+            <a class="nav-link" href="#item-6">Integrating with MongoDB using Mongoose</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1" href="#item-6-1">Install Dependencies</a>
+              <a class="nav-link ms-3 my-1" href="#item-6-2">Set Up Express App</a>
+              <a class="nav-link ms-3 my-1" href="#item-6-3">Connect to MongoDB</a>
+              <a class="nav-link ms-3 my-1" href="#item-6-4">Implement CRUD Operations</a>
+              <a class="nav-link ms-3 my-1" href="#item-6-5">Start the Server</a>
+            </nav>
+          </nav>
+        </nav>
+      </div>
+    <!--Subsections-->
+      <div class="col-8">
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+          <div class="section">
+
+            <div class="sectionTitle" id="item-1">
+              <h4>What is Express.js?</h4>
+            </div>
+
+            <div class="subSection" id="item-1-1">
+              <h5>Description</h5>
+              <p>Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features to develop web and mobile applications. It is designed for building web applications and APIs quickly and easily with Node.js. </p>
+            </div>
+
+            <div class="subSection" id="item-1-2">
+              <h5>Purpose</h5>
+              <p>Express.js simplifies the process of building web applications and APIs in Node.js by providing a set of powerful features and utilities. It abstracts away much of the complexity of working with Node.js HTTP servers, making it easier for developers to focus on writing the application logic rather than dealing with low-level server details. </p>
+            </div>
+
+            <div class="subSection" id="item-1-3">
+              <h5>Example Express App</h5>
+              <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                <div class="card-body">
+                  <p>const express = require('express'); <br>
+                const app = express();<br>
+                const port = 3000; <br></p>
+                  <p>app.get('/', (req, res) => { <br>
+                    res.send('Hello World!');<br>
+                }); </p>
+                    <p>
+                        app.listen(port, () => { <br>
+                        console.log(`Server listening at http://localhost:${port}`); <br>
+                    }); 
+                    </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="subSection" id="item-1-4">
+              <h5>Importance</h5>
+                <p>Express.js is a crucial component in the MERN (MongoDB, Express.js, React, Node.js) stack. It serves as the backend framework responsible for handling HTTP requests, routing, middleware integration, and more. Its importance lies in its simplicity, flexibility, and performance, making it a popular choice for building web applications and APIs in the Node.js ecosystem. </p>
+            </div>
+          </div>
+
+        <div class="section">
+            <div class="sectionTitle" id="item-2">
+              <h4>Setting Up an Express Server</h4>
+            </div>
+            
+            <div class="subSection" id="item-2-1">
+              <h5>Initialize Your Project</h5>
+              <ol>
+                <li>First, ensure you have Node.js installed on your system. You can download it from the official website: <a href="https://nodejs.org/">Node.js.</a></li>
+                <li>Create a new directory for your project and navigate into it using your terminal or command prompt.</li>
+                <li>Run npm init and follow the prompts to create a package.json file. This file will hold metadata about your project and manage dependencies.</li>
+              </ol>
+            </div>
+            
+            <div class="subSection" id="item-2-2">
+              <h5>Integrate Express.js into the MERN stack</h5>
+              <ol>
+                  <li>Install Express.js: Use npm or yarn to install Express.js in your Node.js project: 
+                    <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                      <div class="card-body">
+                        <p>npm install express 
+                          </p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>Create an Express App: Set up your Express.js application by creating an entry file (e.g., app.js or server.js) and importing Express: 
+                    <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                      <div class="card-body">
+                        <p>const express = require('express');  <br>
+                          const app = express(); 
+                          </p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>Define Routes and Middleware: Define routes for handling HTTP requests and integrate middleware as needed: 
+                    <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                      <div class="card-body">
+                        <p>app.get('/', (req, res) => { <br>
+                          res.send('Hello World!'); <br>
+                        }); 
+                          </p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>Start the Server: Listen on a specific port to start the Express.js server: 
+                    <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                      <div class="card-body">
+                        <p>const port = process.env.PORT || 3000; <br>
+                          app.listen(port, () => { <br>
+                            console.log(`Server is running on port ${port}`); <br>
+                          }); 
+                          </p>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+            </div>
+
+            <div class="subSection" id="item-2-3">
+              <h5>Dependencies</h5>
+              <p>Express.js has minimal dependencies. However, common dependencies you might use alongside Express.js include body-parser for parsing request bodies, cors for enabling Cross-Origin Resource Sharing, and mongoose for interacting with MongoDB. </p>
+            </div>
+
+            <div class="subSection" id="item-2-4"></div>
+              <h5> Considerations for Configuration</h5>
+              <p>Some common considerations for configuring Express.js applications include setting up middleware for logging, error handling, authentication, and authorization. Configuration options might include setting the port dynamically from environment variables, configuring CORS settings, enabling compression for response payloads, and setting up HTTPS for secure communication. Configuration is typically done within the Express application setup phase using middleware and environment variables. </p>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="sectionTitle" id="item-3">
+              <h4>Routing and Middleware</h4>
+            </div>
+
+            <div class="subSection" id="item-3-1">
+              <h5>Middleware Functions</h5>
+              <p>Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application's request-response cycle. They can perform tasks such as logging, parsing request bodies, authentication, error handling, etc. Middleware functions are executed sequentially in the order they are added to the Express application.</p>
+              <ul>
+                <li>Example middleware function for logging requests: </li>
+                <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                  <div class="card-body">
+                    <p>const loggerMiddleware = (req, res, next) => {  <br>
+                      console.log(`${req.method} ${req.url}`); <br>
+                      next(); <br>
+                    }; 
+                    </p>
+                  </div>
+                </div>
+              </ul>
+              </div>
+
+            <div class="subSection" id="item-3-2">
+              <h5>Using Middleware</h5>
+              <p>Integrate middleware functions into your Express application using the use() method. Middleware can be applied globally to all routes or selectively to specific routes.</p>
+              <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                <div class="card-body">
+                  <p>app.use(loggerMiddleware); 
+                    </p>
+                </div>
+              </div>
+              </div>
+
+            <div class="subSection" id="item-3-3">
+              <h5>Define Routes</h5>
+              <p>Define routes to handle specific HTTP requests (GET, POST, PUT, DELETE, etc.). Routes are defined using methods like get(), post(), put(), delete(), etc., provided by the Express Router.</p>
+              <ul>
+                <li>Example route for handling GET requests to the root path: 
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>app.get('/', (req, res) => {  <br>
+                        res.send('Hello World!'); <br>
+                      }); 
+                        </p>
+                    </div>
+                  </div>
+                </li>
+                <li>You can also organize your routes using Express Router for better modularity and maintainability. 
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>const router = express.Router(); 
+                        </p>
+                        <p>router.get('/users', (req, res) => {  <br>
+                          // Handle GET request for '/users' <br>
+                        });  
+                        </p>
+                        <p>
+                          router.post('/users', (req, res) => { <br>
+                            // Handle POST request for '/users' <br>
+                          }); 
+                        </p>
+                        <p>// Mount the router at a specific path <br>
+                          app.use('/api', router); </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              With these steps, you've set up routing and middleware for your Express.js application. Middleware functions will be executed for each incoming request, allowing you to preprocess requests, perform authentication, logging, or any other necessary operations. Routes will handle specific HTTP requests and provide appropriate responses. 
+            </div>
+              
+
+              
+          </div>
+
+          <!--begin Handling Requests & Responses -->
+          <div class="section">
+            <div class="sectionTitle" id="item-2">
+              <h4>Handling Requests and Responses</h4>
+            </div>
+            <div class="text-center">
+              <img src="middleware.jpg" class="rounded img-fluid" alt="express.js request-response">
+            </div>
+              <br>
+              <p>Express.js handles requests and responses through a series of middleware functions and route handlers. When a client makes an HTTP request to an Express.js server, the request flows through various middleware functions and route handlers before generating a response. </p>
+              <p> Here's a breakdown of how Express.js handles requests and responses: </p>
+
+                
+            <div class="subSection" id="item-5-1">
+              <h5>Incoming Requests</h5>
+               <p>When a client sends an HTTP request to the Express server, Express parses the request and creates a request object (req) containing information about the request, such as the HTTP method, request URL, request headers, request parameters, query parameters, and request body (if any). </p>
+            </div>
+
+            <div class="subSection" id="item-5-2">
+              <h5>Middleware Execution</h5>
+                <p>Express processes the incoming request through a series of middleware functions. Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application's request-response cycle. Middleware functions can perform tasks such as logging, parsing request bodies, authentication, authorization, error handling, etc. </p>
+                <p>Middleware functions are executed sequentially in the order they are added to the Express application using the use() method. Middleware can be applied globally to all routes or selectively to specific routes. </p>
+            </div>
+
+            <div class="subSection" id="item-5-3">
+              <h5>Route Handling</h5>
+                <p>After passing through the middleware stack, the request is directed to the appropriate route handler based on the request method and URL path. Route handlers are functions responsible for handling specific routes and HTTP methods. Route handlers take two parameters: the request object (req) and the response object (res). </p>
+                <p>Route handlers are defined using methods like get(), post(), put(), delete(), etc., provided by the Express Router. Route handlers are responsible for generating and sending the response back to the client. </p>
+            </div>
+
+            <div class="subSection" id="item-5-4">
+              <h5>Sending Responses</h5>
+                <p>Inside the route handler function, you can generate the response by using methods provided by the response object (res). These methods include send() to send a response with data, json() to send a JSON response, status() to set the HTTP status code, redirect() to redirect the client to a different URL, etc. </p>
+            </div>
+
+            <div class="subSection" id="item-5-5">
+                <h5>Error Handling</h5>
+                  <p>Express also provides mechanisms for handling errors that may occur during request processing. Error handling middleware functions can be defined to catch errors and respond to them appropriately. Error-handling middleware functions take four parameters: the error object (err), the request object (req), the response object (res), and the next middleware function (next). If an error occurs within a route handler or middleware function, you can call next(err) to pass the error to the next error-handling middleware. </p>
+                  <p>By following this request-response cycle, Express.js efficiently handles incoming requests, executes middleware functions, routes requests to the appropriate handlers, generates responses, and handles errors, providing a robust foundation for building web applications and APIs. </p>
+            </div>
+          </div>
+
+          <!--Begin MongoDB & Mongoose-->
+          <div class="section">
+            <div class="sectionTitle" id="item-6">
+              <h4>Integrating with MongoDB using Mongoose </h4>
+            </div>
+
+            <div class="subSection" id="item-6-1">
+              <h5>Install Dependencies </h5>
+              <p>First, make sure you have both Express.js and Mongoose installed in your project. If not, you can install them using npm or yarn:
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>npm install express mongoose 
+                        </p>
+                    </div>
+                  </div>
+                </p>
+            </div>
+
+            <div class="subSection" id="item-6-2">
+              <h5>Set up Express Application</h5>
+              <p>Create an Express application by creating an entry file (e.g., app.js or server.js) and importing Express:
+                <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                  <div class="card-body">
+                    <p>const express = require('express'); <br>
+                      const app = express(); 
+                      </p>
+                  </div>
+                </div>
+              </p>
+            </div>
+
+            <div class="subSection" id="item-6-3">
+              <h5>Connect to MongoDB</h5>
+              <p>Use Mongoose to connect to your MongoDB database. Make sure to replace <db_username>, <db_password>, and <db_name> with your MongoDB credentials and database name:
+                <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                  <div class="card-body">
+                    <p>const mongoose = require('mongoose'); <br>
+                      mongoose.connect('mongodb://<db_username>: <br>
+                      <db_password>@localhost:27017/<db_name>', { <br>
+                        useNewUrlParser: true, <br>
+                        useUnifiedTopology: true <br>
+                      }) 
+                      .then(() => console.log('MongoDB connected')) <br>
+                      .catch(err => console.log(err)); 
+                      </p>
+                  </div>
+                </div>
+              </p>
+              <h5> Define Mongoose Schema</h5>
+              <p>Define Mongoose schemas to represent the structure of your MongoDB documents. Schemas define the fields and data types for your data models.
+                <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                  <div class="card-body">
+                    <p>const mongoose = require('mongoose'); 
+                      </p>
+                      <p>const userSchema = new mongoose.Schema({  <br>
+                      name:String,  <br>
+                      email:String, <br>
+                      age: Number <br>
+                    }); 
+                    </p>
+                    <p>
+                      const User = mongoose.model('User', userSchema); 
+                    </p>
+                    <p>module.exports = User; </p>
+                  </div>
+                </div>
+              </p>
+            </div>
+
+            <div class="subSection" id="item-6-4">
+              <h5>Implement CRUD Operations</h5>
+              <p> Implement CRUD operations to interact with MongoDB using Mongoose models. Below are examples of basic CRUD operations:</p>
+              <ul>
+                <li>Create operation(POST):
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>app.post('/users', async (req, res) => { <br>
+                        try { <br>
+                          const newUser = new User(req.body); <br>
+                          await newUser.save(); <br>
+                          res.status(201).json(newUser); <br>
+                        } catch (err) { <br>
+                          res.status(400).json({ message: err.message }); <br>
+                        } <br>
+                      });   
+                        </p>
+                    </div>
+                  </div>
+                </li>
+                <li>Read operation(GET):
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>app.get('/users', async (req, res) => { <br>
+                        try { <br>
+                        const users = await User.find(); <br>
+                      
+                          res.json(users); <br>
+                      
+                        } catch (err) { <br>
+                      
+                          res.status(500).json({ message: err.message }); <br> 
+                      
+                        } <br>
+                      
+                      }); <br>  
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li>Update Operation (PUT):
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>p.put('/users/:id', async (req, res) => { <br>
+
+                        try { <br>
+                      
+                          const { id } = req.params; <br>
+                      
+                          const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true }); <br>
+                      
+                          res.json(updatedUser); <br>
+                      
+                        } catch (err) { <br>
+                      
+                          res.status(400).json({ message: err.message }); <br>
+                      
+                        } <br>
+                      
+                      }); <br>
+                        </p>
+                    </div>
+                  </div>
+                </li>
+                <li>Delete Operation(DELETE):
+                  <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                    <div class="card-body">
+                      <p>app.delete('/users/:id', async (req, res) => { <br>
+
+                        try { <br>
+                      
+                          const { id } = req.params; <br>
+                      
+                          await User.findByIdAndDelete(id); <br>
+                      
+                          res.json({ message: 'User deleted successfully' }); <br>
+                      
+                        } catch (err) { <br>
+                      
+                          res.status(400).json({ message: err.message }); <br>
+                      
+                        } <br>
+                      
+                      }); 
+                        </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="subSection" id="item-6-5">
+              <h5>Start the Server: </h5>
+              <p>Listen on a specific port to start the Express.js server:
+                <div class="card text-bg-dark mb-3 border border-dark-subtle" style="max-width: 32rem;">
+                  <div class="card-body">
+                    <p>
+                      const port = process.env.PORT || 3000; <br>
+
+                      app.listen(port, () => { <br>
+                      
+                        console.log(`Server is running on port ${port}`); <br> 
+                      
+                      }); <br>
+                      </p>
+                  </div>
+                </div>
+              </p>
+              <p>With these steps, you've integrated Express.js with MongoDB using Mongoose. You can now perform CRUD operations on your MongoDB database from your Express.js application. Make sure to handle errors appropriately and secure your database connection and routes as needed. </p>
+            </div>
+            
+            </div>
+
+    <!---bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
